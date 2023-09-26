@@ -36,7 +36,9 @@ jobs:
           echo "No requirements.txt yet."
         fi
       shell: bash
-
+    - name: Install imageio with ffmpeg plugin
+      run: pip install imageio[ffmpeg]
+      
     - name: Debug List of Installed packages
       run: pip list
 
