@@ -43,7 +43,7 @@ class AppGUI:
     def get_save_path(self):
         return filedialog.asksaveasfilename(defaultextension=".mp4", filetypes=[("MP4 files", "*.mp4")])
 
-
+# This is the main loop
 if __name__ == "__main__":
     root = tk.Tk()
     app = AppGUI(root)
