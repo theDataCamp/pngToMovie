@@ -1,7 +1,9 @@
 import os
 import tkinter as tk
 from tkinter import filedialog, messagebox
-import imageio
+import imageio.v2 as imageio  # Explicitly use v2 as recommended
+from PIL import Image
+import numpy as np
 
 class MovieMaker:
     def __init__(self, folder_path, save_path, frame_duration):
@@ -15,8 +17,15 @@ class MovieMaker:
 
         with imageio.get_writer(self.save_path, mode='I', fps=self.fps) as writer:
             for filename in files:
-                image = imageio.imread(os.path.join(self.folder_path, filename))
-                writer.append_data(image)
+                image_path = os.path.join(self.folder_path, filename)
+                
+                # Use PIL to open and convert the image to RGB
+                pil_image = Image.open(image_path).convert("RGB")
+                
+                # Convert the PIL image back to a numpy array for imageio
+                image_array = np.array(pil_image)
+                
+                writer.append_data(image_array)
 
 class AppGUI:
     def __init__(self, root):
